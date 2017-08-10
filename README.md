@@ -25,7 +25,7 @@ Steps
 
 Remove the margin of body in CSS
 
-Center the table and make it has big as possible (but square and... in CSS)
+Center the table and make it as big as possible (but square and... in CSS)
 
 Create a .black CSS class with a black background color
 
