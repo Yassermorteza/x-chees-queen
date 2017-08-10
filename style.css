@@ -41,10 +41,3 @@ table {
   }
 }
 
-.symbol{
-
-}
-
-.symbol:before{
-  content: "&#9813";
-}
