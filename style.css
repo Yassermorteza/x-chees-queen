@@ -19,5 +19,32 @@ table {
 }
 
 .highlight {
-    box-shadow: 4px 4px 8px 8px #5D4BA2 inset;
+    animation: shadow 1s infinite;
+}
+
+@keyframes shadow {
+
+  0% {
+    box-shadow: 0px 0px 10px 3px #370DD6 inset;
+  }
+
+  50% {
+    box-shadow: 0px 0px 10px 5px #2A0F95 inset;
+  }
+
+  70% {
+    box-shadow: 0px 0px 15px 7px #370DD6 inset;
+  }
+
+  100% {
+    box-shadow: 0px 0px 20px 9px #2A0F95 inset;
+  }
+}
+
+.symbol{
+
+}
+
+.symbol:before{
+  content: "&#9813";
 }

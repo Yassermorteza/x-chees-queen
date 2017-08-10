@@ -34,7 +34,7 @@ function cellClicked(rowNum, columnNum){
 
      removeHighlight();
      highlightRow(rowNum);
-     hightlightColumn(columnNum);
+     hightlightColumn(rowNum,columnNum);
      highlightDiagonals(rowNum, columnNum);
 
 }
@@ -42,7 +42,7 @@ function cellClicked(rowNum, columnNum){
 
 var tr = document.getElementsByTagName('tr');
 
-function highlightRow(rowNum, columnNum){
+function highlightRow(rowNum){
 
   tdNode = tr[rowNum].childNodes;
 
@@ -52,11 +52,12 @@ function highlightRow(rowNum, columnNum){
 
 }
 
-function hightlightColumn(columnNum){
+function hightlightColumn(rowNum,columnNum){
 
+    // tdNode = tr[rowNum].childNodes;
+    // tdNode[columnNum].classList.add('symbol');
     for(var i=0; i < 8; i++){
-
-           tdNode = tr[i].childNodes;
+      tdNode = tr[i].childNodes;
       for(var j=0; j <8; j++){
          tdNode[columnNum].classList.add('highlight');
       }
