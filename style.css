@@ -1,5 +1,6 @@
 html,
 body,
+p
 {
   margin: 0;
   padding: 0;
@@ -12,6 +13,11 @@ table {
  width: 50%;
  height: 640px;
  margin: 0 auto;
+}
+
+td {
+ width: 8.4%;
+ height: 80px;
 }
 
 .black {
@@ -39,5 +45,10 @@ table {
   100% {
     box-shadow: 0px 0px 20px 9px #2A0F95 inset;
   }
+}
+
+p {
+  font-size: 3rem;
+  text-align: center;
 }
 
