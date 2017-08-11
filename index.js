@@ -30,9 +30,9 @@ renderChessboard(table);
 
 function cellClicked(rowNum, columnNum){
 
-     removeHighlight();
+     removeHighlightAndSymbol();
      highlightRow(rowNum);
-     hightlightColumn(rowNum,columnNum);
+     hightlightColumnAddSymbol(rowNum,columnNum);
      highlightDiagonals(rowNum, columnNum);
 }
 
@@ -49,11 +49,16 @@ function highlightRow(rowNum){
 
 }
 
-function hightlightColumn(rowNum,columnNum){
+function hightlightColumnAddSymbol(rowNum,columnNum){
 
     tdNode =tr[rowNum].childNodes;
+
     var addSymbol = tr[rowNum].getElementsByTagName('td');
+    var tdBlack = addSymbol[columnNum].classList.contains('black');
     addSymbol[columnNum].innerHTML='<p>&#9813;</p>';
+    if(tdBlack){
+      addSymbol[columnNum].innerHTML='<p class="white">&#9813;</p>'
+    }
 
     for(var i=0; i < 8; i++){
       tdNode = tr[i].childNodes;
@@ -64,7 +69,7 @@ function hightlightColumn(rowNum,columnNum){
 }
 
 
-function removeHighlight(){
+function removeHighlightAndSymbol(){
 
     var highlightClass = document.querySelectorAll('td');
 
