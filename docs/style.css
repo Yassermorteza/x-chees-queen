@@ -50,8 +50,10 @@ td {
 p {
   font-size: 3rem;
   text-align: center;
+  color: #000;
 }
 
 .white {
   color: #fff;
 }
+

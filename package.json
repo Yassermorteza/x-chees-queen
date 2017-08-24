@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "x-chess-queen",
+  "version": "1.0.0",
+  "description": "Chess Queen Exercise",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "jshint src/index.js && mkdirp docs && cp src/index.html docs/",
+    "build": "browserify src/index.js -o docs/bundle.js",
+    "postbuild": "uglifyjs docs/bundle.js -o docs/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassermorteza/x-chess-queen.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yassermorteza/x-chess-queen/issues"
+  },
+  "homepage": "https://github.com/Yassermorteza/x-chess-queen#readme",
+  "devDependencies": {
+    "array-matrix": "Yassermorteza/x-matrix",
+    "browserify": "^14.4.0",
+    "cp": "^0.2.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.5.3",
+    "jshint": "latest",
+    "nodemon": "latest",
+    "uglify-js": "latest",
+    "mocha": "latest",
+    "expect.js": "latest"
+  }
+}
