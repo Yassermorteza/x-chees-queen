@@ -3,6 +3,7 @@ var createMatrix = arrayMatrixLibrary.createMatrix;
 var matrix = createMatrix(8,8);
 var table = document.querySelector('table');
 var bolean= true;
+var figure =document.querySelector('.figure');
 
 matrix.forEach(function(row, index1){
   var tr = document.createElement('tr');
@@ -12,15 +13,16 @@ matrix.forEach(function(row, index1){
     function event(x,y){
       td.addEventListener('click', function(){
         cellClicked(x,y);
+        figure.style.left = ((table.clientWidth / 8) * y) + 'px';
+        figure.style.top = ((table.clientWidth / 8) * x) + 'px';
       });
     }
     event(index1,index2);
 
     if(bolean){
-      td.classList.add('black');
-      console.log(bolean);
-    }else{
       td.classList.add('white');
+    }else{
+      td.classList.add('black');
     }
 
     bolean=!bolean;
@@ -94,10 +96,16 @@ function hightlightColumnAddSymbol(rowNum,columnNum){
     var addSymbol = tr[rowNum].getElementsByTagName('td');
     var tdBlack = addSymbol[columnNum].classList.contains('black');
 
-    addSymbol[columnNum].innerHTML='<p>&#9813;</p>';
-    if(tdBlack){
-      addSymbol[columnNum].innerHTML='<p class="white">&#9813;</p>';
-    }
+    // addSymbol[columnNum].innerHTML='<p>&#9813;</p>';
+    // if(tdBlack){
+    //   addSymbol[columnNum].innerHTML='<p class="white">&#9813;</p>';
+    // }
+
+     if(tdBlack){
+      figure.style.color = '#fff';
+     }else{
+      figure.style.color = '#000';
+     }
 }
 
 

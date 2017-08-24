@@ -9,10 +9,30 @@ p
   height: 100%;
 }
 
+.container,
 table {
- width: 50%;
- height: 640px;
- margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -50vmin;
+ width: 100vmin;
+ height: 100vmin;
+ }
+
+.container {
+  z-index: 10;
+  pointer-events: none;
+
+}
+
+.figure {
+  width: calc(100vmin / 8);
+  height: calc(100vmin / 8);
+  font-size: 3rem;
+  text-align: center;
+  color: #000;
+  position: absolute;
+  transition: all 218ms ease;
 }
 
 td {
@@ -56,4 +76,3 @@ p {
 .white {
   color: #fff;
 }
-
