@@ -8,7 +8,7 @@
     "prebuild": "jshint src/index.js && mkdirp docs && cp src/index.html docs/",
     "build": "browserify src/index.js -o docs/bundle.js",
     "postbuild": "uglifyjs docs/bundle.js -o docs/bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jshint index.js"
   },
   "repository": {
     "type": "git",
