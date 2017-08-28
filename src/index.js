@@ -1,212 +1,117 @@
 var arrayMatrixLibrary = require('array-matrix');
 var createMatrix = arrayMatrixLibrary.createMatrix;
-var matrix = createMatrix(8,8);
-var table = document.querySelector('table');
-var bolean= true;
-var figure =document.querySelector('.figure');
+var matrix = createMatrix(8, 8);
+var tableDiv = document.querySelector('.chessboard__table');
+var figure = document.querySelector('.chessboard__figures');
+var bolean = true;
 
-matrix.forEach(function(row, index1){
-  var tr = document.createElement('tr');
-  row.forEach(function(col, index2){
-    var td = document.createElement('td');
+matrix.forEach(function(row, index1) {
 
-    function event(x,y){
-      td.addEventListener('click', function(){
-        cellClicked(x,y);
-        figure.style.left = ((table.clientWidth / 8) * y) + 'px';
-        figure.style.top = ((table.clientWidth / 8) * x) + 'px';
-      });
-    }
-    event(index1,index2);
+    var rowDiv = document.createElement('div');
+    rowDiv.classList.add('chessboard__row');
+    row.forEach(function(col, index2) {
+        var cellDiv = document.createElement('div');
+        cellDiv.classList.add('chessboard__cell');
 
-    if(bolean){
-      td.classList.add('white');
-    }else{
-      td.classList.add('black');
-    }
+        cellDiv.addEventListener('click', function() {
+            cellClicked(index1, index2);
+            figure.style.left = ((tableDiv.clientWidth / 8) * index2) + 'px';
+            figure.style.top = ((tableDiv.clientWidth / 8) * index1) + 'px';
+        });
 
-    bolean=!bolean;
-    tr.appendChild(td);
-  });
-  bolean=!bolean;
-  table.appendChild(tr);
+        if (bolean) {
+            cellDiv.classList.add('chessboard__cell--white');
+        } else {
+            cellDiv.classList.add('chessboard__cell--black');
+        }
+
+        bolean = !bolean;
+        rowDiv.appendChild(cellDiv);
+    });
+    bolean = !bolean;
+    tableDiv.appendChild(rowDiv);
 });
 
-// function renderChessboard(table){
-//      // "use strict";
-//      var i,
-//          j;
-//      for( i=0; i < 8; i++){
-//         var tr = document.createElement('tr');
 
-//         for( j=0; j< 8; j++){
-//             var td = document.createElement('td');
+function cellClicked(rowNum, columnNum) {
 
-//             function event(x, y){
-//               td.addEventListener('click', function(){
-//                  cellClicked(x,y);
-//               })
-//             }
-//               event(i,j);
-
-//               if(i % 2 !== 0 && j % 2 === 0){
-//                   td.setAttribute('class', 'black');
-//               }else if(i % 2 ===0 && j % 2 !== 0){
-//                   td.setAttribute('class', 'black');
-//               }
-//             tr.appendChild(td);
-//         }
-//           table.appendChild(tr);
-//       }
-// }
-
-// renderChessboard(table);
-
-function cellClicked(rowNum, columnNum){
-
-     removeHighlightAndSymbol();
-     highlightRow(rowNum);
-     hightlightColumnAddSymbol(rowNum,columnNum);
-     highlightDiagonals(rowNum, columnNum);
+    removeHighlightAndSymbol();
+    highlightRow(rowNum);
+    hightlightColumnAddSymbol(rowNum, columnNum);
+    highlightDiagonals(rowNum, columnNum);
 }
 
 
-var tr = document.getElementsByTagName('tr');
+var tr = document.getElementsByClassName('chessboard__row');
 
-function highlightRow(rowNum){
+function highlightRow(rowNum) {
 
     tdNode = tr[rowNum].childNodes;
 
-    for(var i=0; i < 8; i++){
-     tdNode[i].classList.add('highlight');
+    for (var i = 0; i < 8; i++) {
+        tdNode[i].classList.add('chessboard__cell--highlight');
     }
 }
 
-function hightlightColumnAddSymbol(rowNum,columnNum){
+function hightlightColumnAddSymbol(rowNum, columnNum) {
 
-    tdNode =tr[rowNum].childNodes;
+    tdNode = tr[rowNum].childNodes;
 
-    for(var i=0; i < 8; i++){
-      tdNode = tr[i].childNodes;
-      for(var j=0; j <8; j++){
-         tdNode[columnNum].classList.add('highlight');
-      }
+    for (var i = 0; i < 8; i++) {
+        tdNode = tr[i].childNodes;
+        for (var j = 0; j < 8; j++) {
+            tdNode[columnNum].classList.add('chessboard__cell--highlight');
+        }
     }
 
-    var addSymbol = tr[rowNum].getElementsByTagName('td');
-    var tdBlack = addSymbol[columnNum].classList.contains('black');
-
-    // addSymbol[columnNum].innerHTML='<p>&#9813;</p>';
-    // if(tdBlack){
-    //   addSymbol[columnNum].innerHTML='<p class="white">&#9813;</p>';
-    // }
-
-     if(tdBlack){
-      figure.style.color = '#fff';
-     }else{
-      figure.style.color = '#000';
-     }
+    var addSymbol = tr[rowNum].getElementsByTagName('div');
+    var tdBlack = addSymbol[columnNum].classList.contains('chessboard__cell--black');
+    if (tdBlack) {
+        figure.style.color = '#fff';
+    } else {
+        figure.style.color = '#000';
+    }
 }
 
 
-function removeHighlightAndSymbol(){
+function removeHighlightAndSymbol() {
 
-    var highlightClass = document.querySelectorAll('td');
-
-      highlightClass.forEach(function (el, index){
-
-          var highlight = highlightClass[index].getAttribute('class');
-
-          if(highlight){
-             highlightClass[index].classList.remove('highlight');
-             highlightClass[index].textContent = "";
-          }
-      });
+    var highlightClass = document.querySelectorAll('.chessboard__cell');
+    highlightClass.forEach(function(el, index) {
+        var highlight = highlightClass[index].getAttribute('class');
+        if (highlight) {
+            highlightClass[index].classList.remove('chessboard__cell--highlight');
+            highlightClass[index].textContent = "";
+        }
+    });
 }
 
-function highlightDiagonals(rowNum, columnNum){
+function highlightDiagonals(rowNum, columnNum) {
 
-     for(var i=0; i < 8 ; i++){
+    for (var i = 0; i < 8; i++) {
         var rowLimit = rowNum + i;
-        if(rowLimit <= 7){
-             var tdNodeDown = tr[rowNum +i].childNodes;
-            if(tdNodeDown[columnNum + i]){
-           tdNodeDown[columnNum + i].classList.add('highlight');
+        if (rowLimit <= 7) {
+            var tdNodeDown = tr[rowNum + i].childNodes;
+            if (tdNodeDown[columnNum + i]) {
+                tdNodeDown[columnNum + i].classList.add('chessboard__cell--highlight');
             }
-            if (tdNodeDown[columnNum - i]){
-           tdNodeDown[columnNum - i].classList.add('highlight');
+            if (tdNodeDown[columnNum - i]) {
+                tdNodeDown[columnNum - i].classList.add('chessboard__cell--highlight');
             }
 
-        }else {
-               for(i=0; i <8; i++){
-                    rowLimit = rowNum -i;
-                    if(rowLimit >= 0 ){
-                       var tdNodeUp = tr[rowNum - i].childNodes;
-                       if(tdNodeUp[columnNum - i]){
-                        tdNodeUp[columnNum - i].classList.add('highlight');
-                       }
-                       if(tdNodeUp[columnNum + i]){
-                          tdNodeUp[columnNum + i].classList.add('highlight');
-                       }
+        } else {
+            for (i = 0; i < 8; i++) {
+                rowLimit = rowNum - i;
+                if (rowLimit >= 0) {
+                    var tdNodeUp = tr[rowNum - i].childNodes;
+                    if (tdNodeUp[columnNum - i]) {
+                        tdNodeUp[columnNum - i].classList.add('chessboard__cell--highlight');
+                    }
+                    if (tdNodeUp[columnNum + i]) {
+                        tdNodeUp[columnNum + i].classList.add('chessboard__cell--highlight');
                     }
                 }
             }
-      }
+        }
+    }
 }
-
-
-
-// function tdHandlers() {
-//             var tdNode = table.getElementsByTagName('td');
-//             for(var i=0; i < tdNode.length; i++){
-//             tdNode[i].addEventListener("click" ,function(event) {
-//                                         var row = event.target.parentElement.rowIndex;
-//                                         var col = event.target.cellIndex;
-//                                         console.log(row + ' , ' + col);
-//                                  })}}
-
-// window.onload = tdHandlers();
-
-
-// for(let i = 1; i < 6; i++) {
-//   document.getElementById('my-element' + i)
-//     .addEventListener('click', function() { alert(i) }) //  or ==> item.onclick = function(ev)
-// }
-
-
-// function addLinks () {
-//     for (var i=0, link; i<5; i++) {
-//         link = document.createElement("a");
-//         link.innerHTML = "Link " + i;
-//         link.onclick = function (num) {
-//           return function () {
-//           alert(num);
-//           };
-//         }(i);
-//       document.body.appendChild(link);
-//     }
-// }
-// window.onload = addLinks;
-
-//Or use this method
-// function addLinks () {
-
-//     for (var onclick = function(num){
-//       return function(){alert(num)}},
-//          i=0, link; i<5; i++){
-//         link = document.createElement("a");
-//         link.innerHTML = "Link " + i;
-//         link.onclick = onclick(i);
-//         document.body.appendChild(link);
-//     }
-// };
-
-// onload = addLinks;
-
-
-// tr:nth-child(odd) {background: #150095} /* selects every odd row */
-// tr:nth-child(even) {background: #a293ff} /* selects every even row */
-// li:nth-child(2n+0) {background:grey}  selects every even row of a list
-// li:nth-child(even) {background:grey} /* same as above */
-// li:nth-child(2n+1) {background:white} /* selects every odd row of a list */
-// li:nth-child(odd) {background:white} /* same as above */

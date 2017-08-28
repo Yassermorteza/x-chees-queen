@@ -5,8 +5,9 @@
   "description": "Chess Queen Exercise",
   "main": "index.js",
   "scripts": {
-    "prebuild": "jshint src/index.js && mkdirp docs && cp src/index.html docs/",
-    "build": "browserify src/index.js -o docs/bundle.js",
+    "build:dev": "nodemon -w src/index.html -w src/index.js -w src/style.scss -es,scss,html -x \"npm run build\"",
+    "prebuild": "jshint src/index.js && mkdirp docs && cp src/index.html docs/ && mkdirp docs/image-diffs",
+    "build": "browserify src/index.js -o docs/bundle.js && node-sass src/style.scss docs/style.css && js-beautify src/index.js -o src/index.js",
     "postbuild": "uglifyjs docs/bundle.js -o docs/bundle.js",
     "test": "jshint index.js"
   },
@@ -30,6 +31,7 @@
     "nodemon": "latest",
     "uglify-js": "latest",
     "mocha": "latest",
-    "expect.js": "latest"
+    "expect.js": "latest",
+    "js-beautify": "latest"
   }
 }
