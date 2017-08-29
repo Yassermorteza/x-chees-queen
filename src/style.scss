@@ -19,7 +19,7 @@ body {
     height: 75vmin;
     display: flex;
     flex-direction: column;
-    perspective: 500px;
+    perspective: 50vmin;
     &__table {
        width: 100%;
        height: 100%;
@@ -27,7 +27,7 @@ body {
        transition: all 3000ms ease;
     }
     &--tilted {
-       transform: rotateX(45deg) translateZ(-150px) translateY(-250px);
+       transform: rotateX(45deg) translateZ(-35vmin) translateY(-35vmin);
        transition: all 3000ms ease;
     }
     &__row {
