@@ -41,7 +41,7 @@ describe('Chessboard', function() {
 
   describe('normal design', function() {
     Object.keys(checkStyle.resolutions).forEach(key => {
-      it('has the right styles for ' + key.split('-').join(' '), function () {
+      xit('has the right styles for ' + key.split('-').join(' '), function () {
         checkStyle(browser, key, 'highlight', './docs/image-diffs', 5);
       });
     });
@@ -58,11 +58,12 @@ describe('Chessboard', function() {
       // - Pause the browser slightly longer than the transition duration
       browser.pause(3000);
       // - Also verify that the chessboard get the chessboard--tilted class
-
+      var found = browser.element('.chessboard__table.chessboard--tilted');
+      assert(found.value);
     });
 
     Object.keys(checkStyle.resolutions).forEach(key => {
-      it('has the right styles for ' + key.split('-').join(' '), function () {
+      xit('has the right styles for ' + key.split('-').join(' '), function () {
         checkStyle(browser, key, 'tilted', './docs/image-diffs', 5, 600);
       });
     });
