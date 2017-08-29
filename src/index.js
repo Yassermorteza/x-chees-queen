@@ -2,8 +2,17 @@ var arrayMatrixLibrary = require('array-matrix');
 var createMatrix = arrayMatrixLibrary.createMatrix;
 var matrix = createMatrix(8, 8);
 var tableDiv = document.querySelector('.chessboard__table');
-var figure = document.querySelector('.chessboard__figures');
+// var figure = document.querySelector('.chessboard__figures');
 var bolean = true;
+
+var tilted = document.querySelector('input');
+tilted.addEventListener('change', function() {
+    if (tilted.checked) {
+        tableDiv.classList.add('chessboard--tilted');
+    } else {
+        tableDiv.classList.remove('chessboard--tilted');
+    }
+});
 
 matrix.forEach(function(row, index1) {
 
@@ -15,8 +24,9 @@ matrix.forEach(function(row, index1) {
 
         cellDiv.addEventListener('click', function() {
             cellClicked(index1, index2);
-            figure.style.left = ((tableDiv.clientWidth / 8) * index2) + 'px';
-            figure.style.top = ((tableDiv.clientWidth / 8) * index1) + 'px';
+
+            // figure.style.left = ((tableDiv.clientWidth / 8) * index2) + 'px';
+            // figure.style.top = ((tableDiv.clientWidth / 8) * index1) + 'px';
         });
 
         if (bolean) {
@@ -56,6 +66,7 @@ function highlightRow(rowNum) {
 function hightlightColumnAddSymbol(rowNum, columnNum) {
 
     tdNode = tr[rowNum].childNodes;
+    tdNode[columnNum].classList.add('chessboard__cell--changecolor');
 
     for (var i = 0; i < 8; i++) {
         tdNode = tr[i].childNodes;
@@ -64,13 +75,13 @@ function hightlightColumnAddSymbol(rowNum, columnNum) {
         }
     }
 
-    var addSymbol = tr[rowNum].getElementsByTagName('div');
-    var tdBlack = addSymbol[columnNum].classList.contains('chessboard__cell--black');
-    if (tdBlack) {
-        figure.style.color = '#fff';
-    } else {
-        figure.style.color = '#000';
-    }
+    // var addSymbol = tr[rowNum].getElementsByTagName('div');
+    // var tdBlack = addSymbol[columnNum].classList.contains('chessboard__cell--black');
+    // if (tdBlack) {
+    //     figure.style.color = '#fff';
+    // } else {
+    //     figure.style.color = '#000';
+    // }
 }
 
 
@@ -80,7 +91,7 @@ function removeHighlightAndSymbol() {
     highlightClass.forEach(function(el, index) {
         var highlight = highlightClass[index].getAttribute('class');
         if (highlight) {
-            highlightClass[index].classList.remove('chessboard__cell--highlight');
+            highlightClass[index].classList.remove('chessboard__cell--highlight', 'chessboard__cell--changecolor');
             highlightClass[index].textContent = "";
         }
     });

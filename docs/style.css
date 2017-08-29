@@ -8,26 +8,24 @@ body {
   padding: 0;
   position: relative;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  font-family: sans-serif; }
 
 .chessboard {
-  position: relative;
-  top: 0;
-  left: 50%;
-  margin-left: -50vmin;
-  width: 100vmin;
-  height: 100vmin;
+  margin: 0 auto;
+  width: 75vmin;
+  height: 75vmin;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  perspective: 500px; }
   .chessboard__table {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -50vmin;
-    width: 100vmin;
-    height: 100vmin; }
-  .chessboard__tilted {
-    /* ... */ }
+    width: 100%;
+    height: 100%;
+    border: 5px solid;
+    transition: all 3000ms ease; }
+  .chessboard--tilted {
+    transform: rotateX(45deg) translateZ(-150px) translateY(-250px);
+    transition: all 3000ms ease; }
   .chessboard__row {
     width: 100%;
     height: 12.5%;
@@ -37,36 +35,29 @@ body {
     width: 12.5%;
     height: 100%;
     background-color: #fff; }
-  .chessboard__cell--black {
-    background-color: #000; }
-  .chessboard__cell--highlight {
-    height: 100%; }
-  .chessboard__cell--highlight:after {
-    display: block;
-    content: "";
-    position: relative;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    animation: shadow 1s infinite; }
+    .chessboard__cell:hover {
+      background-color: rgba(0, 68, 0, 0.6); }
+    .chessboard__cell--black {
+      background-color: #000;
+      color: #fff; }
+      .chessboard__cell--black:hover {
+        background-color: #004400; }
+    .chessboard__cell--highlight:after {
+      display: block;
+      content: "";
+      position: relative;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 50%;
+      border: 3px solid;
+      border-radius: 50%; }
   .chessboard__figures {
-    width: calc(100vmin / 8);
-    height: calc(100vmin / 8);
-    font-size: 3rem;
-    text-align: center;
-    color: #000;
-    position: relative;
-    z-index: 10;
-    transition: all 218ms ease; }
-
-@keyframes shadow {
-  0% {
-    box-shadow: 0px 0px 10px 3px #370DD6 inset; }
-  50% {
-    box-shadow: 0px 0px 10px 5px #2A0F95 inset; }
-  70% {
-    box-shadow: 0px 0px 15px 7px #370DD6 inset; }
-  100% {
-    box-shadow: 0px 0px 20px 9px #2A0F95 inset; } }
+    /* width: calc(100vmin / 8);
+        height: calc(100vmin / 8);
+        font-size: 4rem;
+        text-align: center;
+        pointer-events: none;
+        position: relative;
+        z-index: 10;
+        transition: all 218ms ease;*/ }

@@ -9,7 +9,7 @@
     "prebuild": "jshint src/index.js && mkdirp docs && cp src/index.html docs/ && mkdirp docs/image-diffs",
     "build": "browserify src/index.js -o docs/bundle.js && node-sass src/style.scss docs/style.css && js-beautify src/index.js -o src/index.js",
     "postbuild": "uglifyjs docs/bundle.js -o docs/bundle.js",
-    "test": "jshint index.js"
+    "test": "npm run build && wdio test/wdio.conf.js"
   },
   "repository": {
     "type": "git",
@@ -25,13 +25,19 @@
     "array-matrix": "Yassermorteza/x-matrix",
     "browserify": "^14.4.0",
     "cp": "^0.2.0",
-    "mkdirp": "^0.5.1",
-    "node-sass": "^4.5.3",
+    "expect.js": "latest",
+    "js-beautify": "latest",
     "jshint": "latest",
+    "mkdirp": "^0.5.1",
+    "mocha": "latest",
+    "node-sass": "^4.5.3",
     "nodemon": "latest",
     "uglify-js": "latest",
-    "mocha": "latest",
-    "expect.js": "latest",
-    "js-beautify": "latest"
+    "wdio": "^1.0.0",
+    "wdio-mocha-framework": "^0.5.11",
+    "wdio-selenium-standalone-service": "0.0.9",
+    "wdio-spec-reporter": "^0.1.2",
+    "wdio-static-server-service": "^1.0.1",
+    "xt-sc-chess-queen": "github:zeropaper/xt-sc-chess-queen"
   }
 }
